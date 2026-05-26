@@ -1,0 +1,116 @@
+--software_tech_param_skill.zip--
+Content-Type: application/zip
+Content-Disposition: attachment; filename="software_tech_param_skill.zip"
+
+--- skill.json ---
+{
+  "name": "软件产品技术参数表生成",
+  "description": "依据上传的软件功能说明书、产品白皮书，自动生成标准化、可直接用于招标/内部立项/技术评审的产品技术参数表格，支持规范排版、单元格合并、强制等级标注等专业格式输出",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "input_document": {
+        "type": "string",
+        "description": "用户上传的软件功能说明书、产品白皮书、功能清单等原始技术文档内容"
+      },
+      "output_style": {
+        "type": "string",
+        "enum": [
+          "标准招标参数表",
+          "内部技术文档表",
+          "极简清单表"
+        ],
+        "description": "输出表格的使用场景与样式类型"
+      },
+      "table_spec": {
+        "type": "object",
+        "properties": {
+          "column_structure": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "序号",
+              "一级功能域",
+              "二级功能模块",
+              "功能点名称",
+              "技术参数与功能要求",
+              "是否必须",
+              "备注"
+            ],
+            "description": "固定标准列结构，适配招投标与企业内部文档规范"
+          },
+          "required_level": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "default": [
+              "★必须",
+              "必须",
+              "应当"
+            ],
+            "description": "功能强制等级标准取值"
+          },
+          "merge_rule": {
+            "type": "string",
+            "default": "一级功能域相同内容自动合并单元格，表格结构整洁规范",
+            "description": "表格自动排版规则"
+          },
+          "export_format": {
+            "type": "string",
+            "default": "纯表格文本（粘贴Excel即用）+ 标准Excel文件",
+            "description": "输出格式：无多余格式，兼容Excel，可直接下载使用"
+          }
+        },
+        "required": [
+          "column_structure",
+          "required_level",
+          "merge_rule",
+          "export_format"
+        ]
+      }
+    },
+    "required": [
+      "input_document",
+      "output_style",
+      "table_spec"
+    ]
+  }
+}
+
+--- README.txt ---
+软件产品技术参数表生成 - Skill使用说明
+=====================================
+
+【功能简介】
+本Skill用于根据软件功能说明书/产品白皮书，生成可直接用于招标或内部文档的标准化技术参数表，支持规范排版、单元格合并、强制等级标注等专业格式输出。
+
+【适用场景】
+- 招投标文件编制
+- 内部技术评审文档
+- 产品立项材料
+- 软件验收测试用例梳理
+
+【核心特性】
+1. 通用无指向：无项目/产品名称，适配所有软件系统
+2. 标准列结构：序号/一级功能域/二级功能模块/功能点名称/技术参数与功能要求/是否必须/备注
+3. 强制等级规范：统一使用★必须/必须/应当标识
+4. 自动排版：一级功能域相同内容自动合并单元格
+5. 多格式输出：支持纯文本粘贴版与标准Excel文件
+
+【使用方式】
+1. 上传软件功能说明书或产品白皮书
+2. 选择输出样式（标准招标/内部文档/极简清单）
+3. 一键生成技术参数表
+4. 直接复制粘贴到Excel，或下载标准文件使用
+
+【文件清单】
+- skill.json：Skill定义文件
+- README.txt：本说明文档
+
+【版本信息】
+版本：v1.0
+更新日期：2026-05-26
+
